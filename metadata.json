@@ -1,0 +1,13 @@
+{
+  "name": "Tirazayi District Boundary",
+  "country": "Afghanistan",
+  "admin_level": "ADM2",
+  "original_name": "Tere Zayi",
+  "standard_name": "Tirazayi",
+  "source": "geoBoundaries",
+  "crs": "EPSG:4326",
+  "format": "GeoJSON",
+  "created_by": "Usmanullah",
+  "date": "2026-03-29",
+  "description": "Accurate administrative boundary for Tirazayi District extracted from geoBoundaries dataset."
+}

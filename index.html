@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tirazayi District Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        h2 { text-align: center; margin: 10px 0; }
+        #map { height: calc(100vh - 60px); }
+    </style>
+</head>
+<body>
+
+<h2>Tirazayi District (ADM2)</h2>
+<div id="map"></div>
+
+<script>
+// Initialize map
+var map = L.map('map').setView([33.35, 70.15], 10);
+
+// OpenStreetMap basemap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Load GeoJSON
+fetch('data/tirazayi.geojson')
+.then(response => {
+    if (!response.ok) {
+        throw new Error("GeoJSON file not found!");
+    }
+    return response.json();
+})
+.then(data => {
+    var layer = L.geoJSON(data, {
+        style: {
+            color: "#1B5E20",
+            weight: 2,
+            fillColor: "#6CCB5F",
+            fillOpacity: 0.6
+        },
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("<b>Tirazayi District</b><br>ADM2 - Afghanistan");
+        }
+    }).addTo(map);
+
+    // Auto zoom to layer
+    map.fitBounds(layer.getBounds());
+})
+.catch(error => {
+    console.error("Error loading GeoJSON:", error);
+    alert("GeoJSON load error - check file path!");
+});
+</script>
+
+</body>
+</html>
